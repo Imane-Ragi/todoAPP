@@ -1,23 +1,30 @@
-import AddTodoContainer from "../AddTodo";
-import AddTodo from "../AddTodo/componant";
-import App from "./composant";
+import { Component } from 'react';
 
-const AppContainer = (props) => {
-    var days = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ];
-      var d = new Date();
-      var dayName = days[d.getDay()];
+import days from '../helpers';
+import App from './composant';
+import todosData from './mocks';
 
-  return <App date={dayName} handleAdd={handleAdd}/>;
-};
+class AppContainer extends Component {
+  constructor(props) {
+    super(props);
 
-export const handleAdd =  <AddTodo pre="test"/>;
+    this.state = {
+      todos: todosData,
+      dayName: days[new Date().getDay()],
+    };
+  }
+
+  // addTodoTask = (todoTask) => this.setState({ todos: [...this.state.todos, todoTask] });
+  addTodoTask = (todoTask) => {
+    const { todos } = this.state;
+    const newTodos = [...todos, todoTask];
+
+    this.setState({ todos: newTodos });
+  };
+
+  render() {
+    return <App addTodoTask={addTodoTask} {...this.state} />;
+  }
+}
 
 export default AppContainer;

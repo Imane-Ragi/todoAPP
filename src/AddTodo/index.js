@@ -1,25 +1,33 @@
-import data from "../TodoList";
+import { Component } from 'react';
+import data from '../TodoList';
 
-import AddTodo from "./componant.js";
+import AddTodo from './componant.js';
 
-const AddTodoContainer = (props) => {
-    handleAddTask(props.label)
-    handleInputChange(props.label);
-  return 
-   ( <AddTodo
-      handleAddTask={handleAddTask}
-      handleInputChange={handleInputChange}
-      pre="ima"
-    />)
-  ;
-};
+class AddTodoContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      label: '',
+    };
+  }
 
- const handleAddTask = (intext) => {
-  var task = { id: Math.random(), name: intext, completed: false };
-  data.push(task);
-};
+  handleAddTask = (label) => {
+    const newTask = { id: Math.random(), label, completed: false };
+    const { addTodoTask } = this.props;
 
- const handleInputChange = (text) => {
-    this.setState({label:text});
-};
+    addTodoTask(newTask);
+  };
+
+  handleInputChange = ({ target: { value } }) => {
+    // { target: { value } }
+    // event.target.value
+    this.setState({ label: value });
+  };
+
+  render() {
+    const { label } = this.state;
+    return <AddTodo label={label} handleAddTask={handleAddTask} handleInputChange={handleInputChange} />;
+  }
+}
+
 export default AddTodoContainer;
