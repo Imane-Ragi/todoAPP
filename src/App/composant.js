@@ -13,21 +13,19 @@ export class App extends Component {
   }
 
   render() {
-    const { addTodoTask, todos, dayName } = this.props;
+    const { addTodoTask, todos, dayName , deleteTodo,toggleCompleted} = this.props;
 
     return (
-      <Wrapper>
+      <Wrapper className="container">
         <Title className="d-flex justify-content-center">My Todo List For {dayName}</Title>
         <div className="row d-flex justify-content-center">
-          <div>
+          <div className='col-md-4 col-md-offset-4 col-xs-6 col-xs-offset-3'>
             <AddTodo addTodoTask={addTodoTask} />
-            <TodoList todos={todos} />
+            <TodoList todos={todos} deleteTodo={deleteTodo} toggleCompleted={toggleCompleted}/>
           </div>
         </div>
       </Wrapper>
     );
   }
-
-  getList() {}
 }
 export default App;

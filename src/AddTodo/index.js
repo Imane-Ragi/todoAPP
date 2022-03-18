@@ -1,20 +1,25 @@
-import { Component } from 'react';
-import data from '../TodoList';
+import { Component } from "react";
+import data from "../TodoList";
+import {getGUID} from "../helpers";
 
-import AddTodo from './componant.js';
+import AddTodo from "./componant.js";
 
 class AddTodoContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      label: '',
+      label: "",
     };
   }
 
-  handleAddTask = (label) => {
-    const newTask = { id: Math.random(), label, completed: false };
+  handleAddTask = (l) => {
+    const newTask = {
+      id: getGUID(),
+      label: this.state.label,
+      completed: false,
+    };
     const { addTodoTask } = this.props;
-
+    this.setState({ label: "" });
     addTodoTask(newTask);
   };
 
@@ -26,7 +31,13 @@ class AddTodoContainer extends Component {
 
   render() {
     const { label } = this.state;
-    return <AddTodo label={label} handleAddTask={handleAddTask} handleInputChange={handleInputChange} />;
+    return (
+      <AddTodo
+        label={label}
+        handleAddTask={this.handleAddTask}
+        handleInputChange={this.handleInputChange}
+      />
+    );
   }
 }
 

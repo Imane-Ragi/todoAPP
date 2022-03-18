@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const TableStyle = styled.ul`
-  margin: 20px 0;
+  margin: 20px ;
+  padding: 4%;
 `;
+
 
 export const LineStyle = styled.li`
   background: #fff;

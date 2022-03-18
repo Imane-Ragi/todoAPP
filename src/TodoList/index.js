@@ -1,23 +1,36 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-import { TableStyle } from './style.js';
-import Todo from '../Todo/component.js';
+import { TableStyle } from "./style.js";
+import Todo from "../Todo";
 
 class TodoList extends Component {
   constructor(props) {
     super(props);
   }
 
+  handleDeleteTask = (item) => {
+    const { deleteTodo } = this.props;
+
+    deleteTodo(item);
+  };
+
+  handleCompletedTask = (item) => {
+    const { toggleCompleted } = this.props;
+   
+    toggleCompleted(item);
+  };
   render() {
     const { todos } = this.props;
+    console.log("the list in todolist",todos)
     return (
       <TableStyle>
         {todos.map((todo) => (
-          <Todo {...todo} key={todo.id} />
+          <Todo handleDeleteTask={this.handleDeleteTask} handleCompletedTask={this.handleCompletedTask} {...todo} key={todo.id} />
         ))}
       </TableStyle>
     );
   }
+
 }
 
 export default TodoList;
