@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import { TableStyle } from "./style.js";
-import Todo from "../Todo";
+import { TableStyle } from './style.js';
+import Todo from '../Todo';
 
 class TodoList extends Component {
   constructor(props) {
@@ -16,21 +16,26 @@ class TodoList extends Component {
 
   handleCompletedTask = (item) => {
     const { toggleCompleted } = this.props;
-   
+
     toggleCompleted(item);
   };
+
   render() {
     const { todos } = this.props;
-    console.log("the list in todolist",todos)
+
     return (
       <TableStyle>
         {todos.map((todo) => (
-          <Todo handleDeleteTask={this.handleDeleteTask} handleCompletedTask={this.handleCompletedTask} {...todo} key={todo.id} />
+          <Todo
+            handleDeleteTask={this.handleDeleteTask}
+            handleCompletedTask={this.handleCompletedTask}
+            {...todo}
+            key={todo.id}
+          />
         ))}
       </TableStyle>
     );
   }
-
 }
 
 export default TodoList;

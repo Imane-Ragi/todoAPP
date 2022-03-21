@@ -19,6 +19,7 @@ class AddTodoContainer extends Component {
       completed: false,
     };
     const { addTodoTask } = this.props;
+    
     this.setState({ label: "" });
     addTodoTask(newTask);
   };
