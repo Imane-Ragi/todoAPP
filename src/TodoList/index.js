@@ -20,6 +20,13 @@ class TodoList extends Component {
     toggleCompleted(item);
   };
 
+  
+  handleUpdateTask = (idt,newTask) => {
+    const { updateTask } = this.props;
+
+    updateTask(idt,newTask);
+  };
+
   render() {
     const { todos } = this.props;
 
@@ -29,6 +36,7 @@ class TodoList extends Component {
           <Todo
             handleDeleteTask={this.handleDeleteTask}
             handleCompletedTask={this.handleCompletedTask}
+            handleUpdateTask={this.handleUpdateTask}
             {...todo}
             key={todo.id}
           />

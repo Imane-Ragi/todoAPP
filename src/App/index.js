@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import { remove } from 'ramda';
+import { remove,map } from 'ramda';
+import { createStore } from 'redux';
 
 import days from '../helpers';
 import App from './composant';
@@ -8,16 +9,26 @@ import todosData from './mocks';
 class AppContainer extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       todos: todosData,
       dayName: days[new Date().getDay()],
     };
   }
 
+
   addTodoTask = (todoTask) => {
     const { todos } = this.state;
     const newTodos = [...todos, todoTask];
+
+    this.setState({ todos: newTodos });
+  };
+
+  updateTask = (ident,newTask) => {
+    const { todos } = this.state;
+    const newTodos = map(
+      (task) => (task.id === ident ? newTask  : task),
+      todos,
+    );
 
     this.setState({ todos: newTodos });
   };
@@ -60,9 +71,12 @@ class AppContainer extends Component {
         {...this.state}
         deleteTodo={this.deleteTodo}
         toggleCompleted={this.toggleCompleted}
+        updateTask={this.updateTask}
       />
     );
   }
 }
+
+
 
 export default AppContainer;

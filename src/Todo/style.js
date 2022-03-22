@@ -12,17 +12,17 @@ import styled from 'styled-components';
 // `;
 
 export const LineStyle = styled.li(({ completed }) => ({
-  background: completed ? 'white' : '#5529dc',
-  textDecoration: completed ? 'none' : 'line-through',
-  textColor: completed ? 'black' : 'white',
+  background: !completed ? 'white' : '#5529dc',
+  textDecoration: !completed ? 'none' : 'line-through',
+  textColor: !completed ? 'black' : 'white',
   borderRadius: 5,
   marginBottom: 7,
-  position: relative,
+  position: "relative",
   wordBreak: 'break-word',
   padding: '2% 50px',
 }));
 
 export const Wrapper = styled.div`
   display: flex,
-  align-items: baseline,
+  align-items: baseline
 `;

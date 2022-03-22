@@ -28,6 +28,12 @@ class Todo extends Component {
     //   : this.setState({ background: "#5529dc", textDecoration: "line-through" , textColor:"white"});
   };
 
+  update = (newTask) => {
+    const { id,label , completed,handleUpdateTask } = this.props;
+    handleUpdateTask(id,newTask);
+  };
+
+
   render() {
     const { label, completed } = this.props;
     console.log('the list in todolist', completed);
@@ -43,7 +49,7 @@ class Todo extends Component {
 
           <div className="col-8">
             <i className="fa fa-check-square-o add-btn p-3" title="Complete item" onClick={this.complete}></i>
-            <i className="fa fa-pencil add-btn p-3" title="Update item"></i>
+            <i className="fa fa-pencil add-btn p-3" title="Update item" onClick={this.update}></i>
             <i className="fa fa-trash add-btn p-3" title="Delete item" onClick={this.delete}></i>
           </div>
         </Wrapper>

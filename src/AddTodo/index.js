@@ -24,6 +24,16 @@ class AddTodoContainer extends Component {
     addTodoTask(newTask);
   };
 
+  handleUpdateTask = (idt) => {
+    const updatedTask = {
+      label: this.state.label,
+    };
+    const { updateTask } = this.props;
+    
+    this.setState({ label: "" });
+    updateTask(idt,updatedTask);
+  };
+
   handleInputChange = ({ target: { value } }) => {
     // { target: { value } }
     // event.target.value
