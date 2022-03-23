@@ -14,6 +14,12 @@ class TodoList extends Component {
     deleteTodo(item);
   };
 
+  getTaskId = (id) => {
+    const { getTaskId } = this.props;
+
+    getTaskId(id);
+  };
+
   handleCompletedTask = (item) => {
     const { toggleCompleted } = this.props;
 
@@ -39,6 +45,7 @@ class TodoList extends Component {
             handleUpdateTask={this.handleUpdateTask}
             {...todo}
             key={todo.id}
+            getTaskId={this.getTaskId}
           />
         ))}
       </TableStyle>

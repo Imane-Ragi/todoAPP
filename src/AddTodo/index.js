@@ -7,12 +7,19 @@ import AddTodo from "./componant.js";
 class AddTodoContainer extends Component {
   constructor(props) {
     super(props);
+    this.handleActions= this.handleActions.bind(this)
     this.state = {
-      label: "",
+      label: ""
     };
   }
 
-  handleAddTask = (l) => {
+  componentWillReceiveProps(nextProps) {
+    const { task } = nextProps;
+    (task.id!== null && task.id !== undefined )?this.setState({label:task.label}):this.setState({label:""})
+    console.log(task);
+  }
+  
+  handleAddTask = () => {
     const newTask = {
       id: getGUID(),
       label: this.state.label,
@@ -24,16 +31,21 @@ class AddTodoContainer extends Component {
     addTodoTask(newTask);
   };
 
-  handleUpdateTask = (idt) => {
-    const updatedTask = {
-      label: this.state.label,
-    };
+  handleUpdateTask = () => {
     const { updateTask } = this.props;
-    
+    console.log(updateTask)
+    updateTask(this.state.label);
     this.setState({ label: "" });
-    updateTask(idt,updatedTask);
   };
 
+  handleActions() {
+    const { task } = this.props;
+     if (task.id !==  null)
+     
+       this.handleUpdateTask();
+      else this.handleAddTask();
+
+  }
   handleInputChange = ({ target: { value } }) => {
     // { target: { value } }
     // event.target.value
@@ -42,11 +54,14 @@ class AddTodoContainer extends Component {
 
   render() {
     const { label } = this.state;
+    const { isUpdate ,task} = this.props;
     return (
       <AddTodo
         label={label}
-        handleAddTask={this.handleAddTask}
         handleInputChange={this.handleInputChange}
+        handleActions={this.handleActions}
+        isUpdate={isUpdate}
+        task={task}
       />
     );
   }

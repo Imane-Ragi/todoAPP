@@ -32,7 +32,11 @@ class Todo extends Component {
     const { id,label , completed,handleUpdateTask } = this.props;
     handleUpdateTask(id,newTask);
   };
-
+  getTaskId = () => {
+    const { id,getTaskId } = this.props;
+    getTaskId(id )
+  }
+  
 
   render() {
     const { label, completed } = this.props;
@@ -49,7 +53,7 @@ class Todo extends Component {
 
           <div className="col-8">
             <i className="fa fa-check-square-o add-btn p-3" title="Complete item" onClick={this.complete}></i>
-            <i className="fa fa-pencil add-btn p-3" title="Update item" onClick={this.update}></i>
+            <i className="fa fa-pencil add-btn p-3" title="Update item" onClick={this.getTaskId}></i>
             <i className="fa fa-trash add-btn p-3" title="Delete item" onClick={this.delete}></i>
           </div>
         </Wrapper>

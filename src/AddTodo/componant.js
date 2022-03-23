@@ -8,7 +8,7 @@ export class AddTodo extends Component {
   }
 
   render() {
-    const { label, handleAddTask, handleInputChange: handleChange } = this.props;
+    const { label, handleActions, handleInputChange: handleChange ,isUpdate} = this.props;
 
     return (
       <Wrapper className="form-group has-feedback d-flex flex-row ">
@@ -19,7 +19,7 @@ export class AddTodo extends Component {
           value={label}
           onChange={handleChange}
         />
-        <button className="fa fa-plus add-btn p-3" title="Add item" onClick={handleAddTask}></button>
+        <button className={isUpdate?'fa fa-pencil add-btn p-3':'fa fa-plus add-btn p-3'} title="Add item" onClick={handleActions}></button>
       </Wrapper>
     );
   }
