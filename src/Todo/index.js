@@ -12,35 +12,9 @@ class Todo extends Component {
     // };
   }
 
-  delete = () => {
-    const { id, handleDeleteTask } = this.props;
-
-    handleDeleteTask(id);
-  };
-
-  complete = () => {
-    const { id, handleCompletedTask } = this.props;
-
-    handleCompletedTask(id);
-
-    // completed
-    //   ? this.setState({ background: "white", textDecoration: "none",textColor: "black" })
-    //   : this.setState({ background: "#5529dc", textDecoration: "line-through" , textColor:"white"});
-  };
-
-  update = (newTask) => {
-    const { id,label , completed,handleUpdateTask } = this.props;
-    handleUpdateTask(id,newTask);
-  };
-  getTaskId = () => {
-    const { id,getTaskId } = this.props;
-    getTaskId(id )
-  }
-  
 
   render() {
-    const { label, completed } = this.props;
-    console.log('the list in todolist', completed);
+    const { label, completed ,showTodo ,id, handleCompletedTask, handleDeleteTask} = this.props;
     return (
       <LineStyle
         completed={completed}
@@ -52,18 +26,14 @@ class Todo extends Component {
           <div className="col-4">{label}</div>
 
           <div className="col-8">
-            <i className="fa fa-check-square-o add-btn p-3" title="Complete item" onClick={this.complete}></i>
-            <i className="fa fa-pencil add-btn p-3" title="Update item" onClick={this.getTaskId}></i>
-            <i className="fa fa-trash add-btn p-3" title="Delete item" onClick={this.delete}></i>
+            <i className="fa fa-check-square-o add-btn p-3" title="Complete item" onClick={() => handleCompletedTask(id)}></i>
+            <i className="fa fa-pencil add-btn p-3" title="Update item" onClick={() => showTodo(id)}></i>
+            <i className="fa fa-trash add-btn p-3" title="Delete item" onClick={() => handleDeleteTask(id)}></i>
           </div>
         </Wrapper>
       </LineStyle>
     );
   }
 }
-
-LineStyle.defaultProps = {
-  background: '#fff',
-};
 
 export default Todo;

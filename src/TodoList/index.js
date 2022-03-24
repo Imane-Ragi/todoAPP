@@ -8,44 +8,19 @@ class TodoList extends Component {
     super(props);
   }
 
-  handleDeleteTask = (item) => {
-    const { deleteTodo } = this.props;
-
-    deleteTodo(item);
-  };
-
-  getTaskId = (id) => {
-    const { getTaskId } = this.props;
-
-    getTaskId(id);
-  };
-
-  handleCompletedTask = (item) => {
-    const { toggleCompleted } = this.props;
-
-    toggleCompleted(item);
-  };
-
-  
-  handleUpdateTask = (idt,newTask) => {
-    const { updateTask } = this.props;
-
-    updateTask(idt,newTask);
-  };
 
   render() {
-    const { todos } = this.props;
+    const { todos,deleteTodo,toggleCompleted,showTodo } = this.props;
 
     return (
       <TableStyle>
         {todos.map((todo) => (
           <Todo
-            handleDeleteTask={this.handleDeleteTask}
-            handleCompletedTask={this.handleCompletedTask}
-            handleUpdateTask={this.handleUpdateTask}
+            handleDeleteTask={deleteTodo}
+            handleCompletedTask={toggleCompleted}
             {...todo}
             key={todo.id}
-            getTaskId={this.getTaskId}
+            showTodo={showTodo}
           />
         ))}
       </TableStyle>

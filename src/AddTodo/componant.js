@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
-import { Wrapper } from './style.js';
+import {Wrapper} from './style.js';
 
 export class AddTodo extends Component {
   constructor(props) {
@@ -8,7 +8,12 @@ export class AddTodo extends Component {
   }
 
   render() {
-    const { label, handleActions, handleInputChange: handleChange ,isUpdate} = this.props;
+    const {
+      label,
+      handleActions,
+      handleInputChange: handleChange,
+      isUpdate,
+    } = this.props;
 
     return (
       <Wrapper className="form-group has-feedback d-flex flex-row ">
@@ -19,7 +24,13 @@ export class AddTodo extends Component {
           value={label}
           onChange={handleChange}
         />
-        <button className={isUpdate?'fa fa-pencil add-btn p-3':'fa fa-plus add-btn p-3'} title="Add item" onClick={handleActions}></button>
+        <button
+          className={
+            isUpdate ? 'fa fa-pencil add-btn p-3' : 'fa fa-plus add-btn p-3'
+          }
+          title="Add item"
+          onClick={handleActions}
+        ></button>
       </Wrapper>
     );
   }

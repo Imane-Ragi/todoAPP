@@ -2,44 +2,42 @@ import { Component } from "react";
 import { remove, map, find } from "ramda";
 
 import days from "../helpers";
-import App from "./composant";
+import App from "./componant";
 import todosData from "./mocks";
 
 class AppContainer extends Component {
   constructor(props) {
     super(props);
-    this.updateTask= this.updateTask.bind(this)
+    this.updateTodo = this.updateTodo.bind(this);
     this.state = {
       todos: todosData,
       dayName: days[new Date().getDay()],
-      updatedTask: {},
-      isUpdate:false
+      todo: {},
     };
   }
 
-  addTodoTask = (todoTask) => {
+  addTodo = (todoTask) => {
     const { todos } = this.state;
     const newTodos = [...todos, todoTask];
 
     this.setState({ todos: newTodos });
   };
 
-  getTaskId = (id) => {
+  showTodoThatWillUpdate = (id) => {
     const { todos } = this.state;
-    const updatedTask = find((task) => task.id === id, todos);
-    console.log(updatedTask);
-    this.setState({ updatedTask: updatedTask ,isUpdate:true});
+    const todo = find((task) => task.id === id, todos);
+    this.setState({ todo });
   };
 
-  updateTask(taskToUpdate) {
-    const { updatedTask, todos } = this.state;
+  updateTodo(newLabel) {
+    const { todo, todos } = this.state;
     const newsTodos = map(
       (task) =>
-        task.id === updatedTask.id ? { ...task, label: taskToUpdate } : task,
+        task.id === todo.id ? { ...task, label: newLabel } : task,
       todos
     );
     console.log(newsTodos);
-    this.setState({ todos: newsTodos, updatedTask: {} , isUpdate:false});
+    this.setState({ todos: newsTodos, todo: {} });
   }
 
   deleteTodo = (ident) => {
@@ -61,11 +59,11 @@ class AppContainer extends Component {
   //   console.log(todos);
   // };
 
-  toggleCompleted = (ident) => {
+  toggleCompleted = (id) => {
     const { todos } = this.state;
     const newTodos = map(
       (task) =>
-        task.id === ident ? { ...task, completed: !task.completed } : task,
+        task.id === id ? { ...task, completed: !task.completed } : task,
       todos
     );
 
@@ -77,14 +75,14 @@ class AppContainer extends Component {
   render() {
     return (
       <App
-        addTodoTask={this.addTodoTask}
+        addTodo={this.addTodo}
         {...this.state}
         deleteTodo={this.deleteTodo}
         toggleCompleted={this.toggleCompleted}
-        updateTask={this.updateTask}
-        getTaskId={this.getTaskId}
-        task = {this.state.updatedTask}
-        isUpdate= { this.state.isUpdate}
+        updateTodo={this.updateTodo}
+        showTodo={this.showTodoThatWillUpdate}
+        todo={this.state.todo}
+  
       />
     );
   }
