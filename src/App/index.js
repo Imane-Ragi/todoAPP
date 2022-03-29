@@ -8,7 +8,6 @@ import todosData from "./mocks";
 class AppContainer extends Component {
   constructor(props) {
     super(props);
-    this.updateTodo = this.updateTodo.bind(this);
     this.state = {
       todos: todosData,
       dayName: days[new Date().getDay()],
