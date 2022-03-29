@@ -1,22 +1,17 @@
-import { Component } from "react";
-import { getGUID } from "../helpers";
+import { Component } from 'react';
+import { connect } from 'react-redux';
+import { getGUID } from '../helpers';
+import { addTodoAction } from '../reducers/todos/actions';
 
-import AddTodo from "./componant.js";
+import AddTodo from './componant.js';
 
 class AddTodoContainer extends Component {
   constructor(props) {
     super(props);
     this.handleActions = this.handleActions.bind(this);
     this.state = {
-      label: "",
+      label: '',
     };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { todo } = nextProps;
-    
-    const label = todo.id !== null && todo.id !== undefined?todo.label:'';
-       this.setState({ label })
   }
 
   handleAddTask = () => {
@@ -25,33 +20,23 @@ class AddTodoContainer extends Component {
       label: this.state.label,
       completed: false,
     };
-    const { addTodo } = this.props;
+    const { addTodoAction: addTodoActionProp } = this.props;
 
-    this.setState({ label: "" });
-    addTodo(newTask);
+    this.setState({ label: '' });
+    addTodoActionProp(newTask);
+    // dispatch(addTodoAction(newTask));
   };
 
-  handleUpdateTask = () => {
-    const { updateTodo } = this.props;
-    const { label } = this.state;
-    updateTodo(label);
-    this.setState({ label: "" });
-  };
+  handleActions() {}
 
-  handleActions() {
-    const { todo } = this.props;
-    if ( todo.id !== null && todo.id !== undefined) this.handleUpdateTask();
-    else this.handleAddTask();
-  }
   handleInputChange = ({ target: { value } }) => {
-    // { target: { value } }
-    // event.target.value
     this.setState({ label: value });
   };
 
   render() {
     const { label } = this.state;
     const { todo } = this.props;
+
     return (
       <AddTodo
         label={label}
@@ -64,4 +49,15 @@ class AddTodoContainer extends Component {
   }
 }
 
-export default AddTodoContainer;
+const mapStateToProps = (store) => ({
+  todo: store.todo,
+  todos: store.todos,
+});
+
+const mapDispatch = () => ({
+  addTodoAction,
+});
+
+const connector = connect(mapStateToProps, mapDispatch);
+
+export default connector(AddTodoContainer);

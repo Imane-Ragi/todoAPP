@@ -1,34 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import {store} from './App/redux.js'
+import reportWebVitals from './reportWebVitals';
+import App from './App';
+import './index.css';
+import store from './reducers/store';
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById("root"));
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);
 
-//STORE 
+//STORE
 
-//ACTION 
+//ACTION
 
 //REDUCER
 
-
 //DISPATCH
-
-
-
-
-
-
-
-
-
-
-
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
