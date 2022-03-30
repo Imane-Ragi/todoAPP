@@ -1,9 +1,7 @@
 import { Component } from 'react';
-import { remove, map, find } from 'ramda';
 
 import days from '../helpers';
 import App from './componant';
-import todosData from './mocks';
 
 class AppContainer extends Component {
   constructor(props) {

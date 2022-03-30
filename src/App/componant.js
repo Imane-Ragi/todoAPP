@@ -21,7 +21,7 @@ export class App extends Component {
         <div className="row d-flex justify-content-center">
           <div className="col-md-4 col-md-offset-4 col-xs-6 col-xs-offset-3">
             <AddTodo />
-            {/* <TodoList /> */}
+            <TodoList /> 
           </div>
         </div>
       </Wrapper>

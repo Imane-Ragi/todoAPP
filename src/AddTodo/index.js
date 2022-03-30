@@ -42,21 +42,22 @@ class AddTodoContainer extends Component {
         label={label}
         handleInputChange={this.handleInputChange}
         handleActions={this.handleActions}
-        isUpdate={todo.id !== null && todo.id !== undefined}
-        todo={todo}
+        handleAddTask={this.handleAddTask}
+    
       />
     );
   }
 }
 
 const mapStateToProps = (store) => ({
-  todo: store.todo,
+  //todo: store.todo,
   todos: store.todos,
+  todoTobeUpdated : store.todoTobeUpdated
 });
 
-const mapDispatch = () => ({
-  addTodoAction,
-});
+const mapDispatch = {
+  addTodoAction
+};
 
 const connector = connect(mapStateToProps, mapDispatch);
 

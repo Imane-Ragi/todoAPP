@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { TableStyle } from './style.js';
 import Todo from '../Todo';
-import {useSelector} from 'react-redux';
 
 class TodoList extends Component {
   constructor(props) {
@@ -10,24 +10,29 @@ class TodoList extends Component {
  
   }
 
-
   render() {
-    const { todos,deleteTodo,toggleCompleted,showTodo } = this.props
-    console.log(tasks)
+    const { todos: todosProp } = this.props
+   console.log(todosProp);
     return (
       <TableStyle>
-        {tasks.map((todo) => (
+        {todosProp.todos.map((todo) => (
           <Todo
-            handleDeleteTask={deleteTodo}
-            handleCompletedTask={toggleCompleted}
             {...todo}
             key={todo.id}
-            showTodo={showTodo}
+          
           />
         ))}
-      </TableStyle>
+        </TableStyle>
     );
   }
 }
 
-export default TodoList;
+const mapStateToProps = (store) => ({
+  //todo: store.todo,
+  todos: store.todos,
+});
+
+
+const connector = connect(mapStateToProps);
+
+export default connector(TodoList);
