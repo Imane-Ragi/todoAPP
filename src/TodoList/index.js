@@ -11,11 +11,11 @@ class TodoList extends Component {
   }
 
   render() {
-    const { todos: todosProp } = this.props
-   console.log(todosProp);
+    const { todos } = this.props.todos
+   console.log(this.props.todos);
     return (
       <TableStyle>
-        {todosProp.todos.map((todo) => (
+        {todos.map((todo) => (
           <Todo
             {...todo}
             key={todo.id}

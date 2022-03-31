@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 
 import { LineStyle, Wrapper } from './style.js';
-import { addTodoAction,deleteTodoAction,updateTodoAction } from '../reducers/todos/actions';
+import { addTodoAction,deleteTodoAction,showTodoAction,toggleCompletedAction } from '../reducers/todos/actions';
 
 class Todo extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class Todo extends Component {
 
 
   render() {
-    const { label, completed ,showTodo ,id, deleteTodoAction:deleteTodoActionProps, updateTodoAction:updateTodoActionProps} = this.props;
+    const { label, completed ,showTodoAction ,id, deleteTodoAction:deleteTodoActionProps,toggleCompletedAction} = this.props;
     return (
       <LineStyle
         completed={completed}
@@ -29,8 +29,8 @@ class Todo extends Component {
           <div className="col-4">{label}</div>
 
           <div className="col-8">
-            <i className="fa fa-check-square-o add-btn p-3" title="Complete item" onClick={() => handleCompletedTask(id)}></i>
-            <i className="fa fa-pencil add-btn p-3" title="Update item" onClick={() => updateTodoActionProps(id)}></i>
+            <i className="fa fa-check-square-o add-btn p-3" title="Complete item" onClick={() => toggleCompletedAction(id)}></i>
+            <i className="fa fa-pencil add-btn p-3" title="Update item" onClick={() => showTodoAction(id)}></i>
             <i className="fa fa-trash add-btn p-3" title="Delete item" onClick={() => deleteTodoActionProps(id)}></i>
           </div>
         </Wrapper>
@@ -47,7 +47,8 @@ const mapStateToProps = (store) => ({
 const mapDispatch = {
   addTodoAction,
   deleteTodoAction,
-  updateTodoAction
+  showTodoAction,
+  toggleCompletedAction
 };
 
 const connector = connect(mapStateToProps, mapDispatch);

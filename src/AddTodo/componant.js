@@ -11,9 +11,8 @@ export class AddTodo extends Component {
     const {
       label,
       handleActions,
-      handleAddTask,
       handleInputChange: handleChange,
-      isUpdate,
+      isUpdate
     } = this.props;
 
     return (
@@ -30,7 +29,7 @@ export class AddTodo extends Component {
             isUpdate ? 'fa fa-pencil add-btn p-3' : 'fa fa-plus add-btn p-3'
           }
           title="Add item"
-          onClick={handleAddTask}
+          onClick={handleActions}
         ></button>
       </Wrapper>
     );

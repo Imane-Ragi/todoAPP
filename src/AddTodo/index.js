@@ -1,7 +1,10 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { eqProps } from 'ramda';
+
+
 import { getGUID } from '../helpers';
-import { addTodoAction } from '../reducers/todos/actions';
+import { addTodoAction ,updateTodoAction} from '../reducers/todos/actions';
 
 import AddTodo from './componant.js';
 
@@ -13,6 +16,13 @@ class AddTodoContainer extends Component {
       label: '',
     };
   }
+
+   componentWillReceiveProps(nextProps) {
+     const { todoTobeUpdated } = nextProps.todos;
+     console.log( nextProps)
+     const label = todoTobeUpdated.id !== null && todoTobeUpdated.id !== undefined?todoTobeUpdated.label:'';
+        this.setState({ label })
+   } 
 
   handleAddTask = () => {
     const newTask = {
@@ -27,7 +37,21 @@ class AddTodoContainer extends Component {
     // dispatch(addTodoAction(newTask));
   };
 
-  handleActions() {}
+  handleUpdateTask = () => {
+    const { updateTodoAction } = this.props;
+    const updatedTask = {
+      label: this.state.label
+    };
+    updateTodoAction(updatedTask)
+    this.setState({ label: '' });
+  };
+
+  handleActions() {
+    const { todoTobeUpdated } = this.props.todos;
+    console.log(todoTobeUpdated)
+    if(todoTobeUpdated?.id != null )  this.handleUpdateTask(); else this.handleAddTask();
+    
+  }
 
   handleInputChange = ({ target: { value } }) => {
     this.setState({ label: value });
@@ -35,14 +59,14 @@ class AddTodoContainer extends Component {
 
   render() {
     const { label } = this.state;
-    const { todo } = this.props;
+    const { isUpdate } = this.props;
 
     return (
       <AddTodo
         label={label}
         handleInputChange={this.handleInputChange}
         handleActions={this.handleActions}
-        handleAddTask={this.handleAddTask}
+        isUpdate = {isUpdate}
     
       />
     );
@@ -52,11 +76,12 @@ class AddTodoContainer extends Component {
 const mapStateToProps = (store) => ({
   //todo: store.todo,
   todos: store.todos,
-  todoTobeUpdated : store.todoTobeUpdated
+  isUpdate : store.todos.isUpdate
 });
 
 const mapDispatch = {
-  addTodoAction
+  addTodoAction,
+  updateTodoAction
 };
 
 const connector = connect(mapStateToProps, mapDispatch);
